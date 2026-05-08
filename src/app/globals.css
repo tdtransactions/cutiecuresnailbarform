@@ -1,0 +1,281 @@
+@import url('https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --primary: #d17a86;
+  --primary-hover: #b8626e;
+  --bg-color: #fcf9f9;
+  --text-main: #2d2424;
+  --text-light: #6b5e5e;
+  --card-bg: rgba(255, 255, 255, 0.85);
+  --input-bg: rgba(255, 255, 255, 0.9);
+  --error: #e63946;
+  --success: #2a9d8f;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Jost', sans-serif;
+  background-color: var(--bg-color);
+  background-image: radial-gradient(at 0% 0%, hsla(350,100%,96%,1) 0, transparent 50%), radial-gradient(at 50% 0%, hsla(340,100%,96%,1) 0, transparent 50%), radial-gradient(at 100% 0%, hsla(350,100%,96%,1) 0, transparent 50%);
+  color: var(--text-main);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  -webkit-font-smoothing: antialiased;
+}
+
+.container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.card {
+  background: var(--card-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 24px;
+  padding: 40px 30px;
+  width: 100%;
+  max-width: 480px;
+  box-shadow: 0 20px 40px rgba(209, 122, 134, 0.08);
+  position: relative;
+  overflow: hidden;
+}
+
+.card-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+h1 {
+  font-family: 'Jost', sans-serif;
+  font-size: 2.2rem;
+  color: var(--text-main);
+  margin-bottom: 8px;
+}
+
+.subtitle {
+  color: var(--text-light);
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.form-group {
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.form-group label {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin-bottom: 8px;
+  color: var(--text-main);
+}
+
+.form-control {
+  width: 100%;
+  padding: 14px 16px;
+  border: 1px solid rgba(209, 122, 134, 0.2);
+  border-radius: 12px;
+  background: var(--input-bg);
+  font-family: inherit;
+  font-size: 1rem;
+  color: var(--text-main);
+  transition: all 0.3s ease;
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(209, 122, 134, 0.15);
+}
+
+.btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 16px;
+  border: none;
+  border-radius: 12px;
+  background-color: var(--primary);
+  color: white;
+  font-family: inherit;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(209, 122, 134, 0.3);
+  margin-top: 10px;
+}
+
+.btn-secondary {
+  background-color: transparent;
+  color: var(--primary);
+  box-shadow: none;
+  border: 2px solid var(--primary);
+}
+
+.btn-secondary:hover {
+  background-color: rgba(209, 122, 134, 0.05);
+  box-shadow: none;
+}
+
+.btn:hover:not(:disabled) {
+  background-color: var(--primary-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(209, 122, 134, 0.4);
+}
+
+.btn-secondary:hover:not(:disabled) {
+  background-color: rgba(209, 122, 134, 0.05);
+}
+
+.btn:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.btn:disabled {
+  background-color: #e0c8cc;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.btn-secondary:disabled {
+  background-color: transparent;
+  border-color: #e0c8cc;
+  color: #e0c8cc;
+}
+
+.error-message {
+  color: var(--error);
+  font-size: 0.85rem;
+  margin-top: 6px;
+  display: block;
+}
+
+.global-error {
+  background: rgba(230, 57, 70, 0.1);
+  color: var(--error);
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+/* Steps Animation */
+.step-container {
+  animation: fadeIn 0.4s ease-out forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.code-display {
+  background: rgba(209, 122, 134, 0.1);
+  border: 2px dashed var(--primary);
+  border-radius: 16px;
+  padding: 30px 20px;
+  text-align: center;
+  margin: 30px 0;
+}
+
+.code-value {
+  font-family: 'Jost', sans-serif;
+  font-size: 2.5rem;
+  font-weight: 700;
+  letter-spacing: 4px;
+  color: var(--primary);
+  margin-bottom: 10px;
+  display: block;
+}
+
+.code-hint {
+  font-size: 0.9rem;
+  color: var(--text-light);
+}
+
+.success-icon {
+  width: 64px;
+  height: 64px;
+  background: var(--success);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
+  color: white;
+}
+
+.success-icon svg {
+  width: 32px;
+  height: 32px;
+}
+
+.redirect-text {
+  font-size: 0.85rem;
+  color: var(--text-light);
+  margin-top: 20px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.terms {
+  font-size: 0.75rem;
+  color: var(--text-light);
+  text-align: center;
+  margin-top: 20px;
+  line-height: 1.4;
+  border-top: 1px solid rgba(0,0,0,0.05);
+  padding-top: 15px;
+}
+
+.loading-spinner {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 2px solid rgba(255,255,255,0.3);
+  border-radius: 50%;
+  border-top-color: white;
+  animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@media (max-width: 480px) {
+  .card {
+    padding: 30px 20px;
+  }
+  h1 {
+    font-size: 1.8rem;
+  }
+  .code-value {
+    font-size: 2rem;
+  }
+}
