@@ -14,6 +14,21 @@ export async function POST(request: Request) {
     // Use default code
     const code = '936470';
 
+    // Calculate validity dates (2 weeks)
+    const now = new Date();
+    const expiry = new Date();
+    expiry.setDate(now.getDate() + 14);
+
+    const formatDate = (date: Date) => {
+      const d = date.getDate().toString().padStart(2, '0');
+      const m = (date.getMonth() + 1).toString().padStart(2, '0');
+      const y = date.getFullYear();
+      return `${d}/${m}/${y}`;
+    };
+
+    const startDate = formatDate(now);
+    const endDate = formatDate(expiry);
+
     // Send email to the shop owner
     const data = await resend.emails.send({
       from: 'Cutiecures Nail Bar <onboarding@resend.dev>', // Replace with your verified domain for production
@@ -58,6 +73,10 @@ export async function POST(request: Request) {
                             <a href="mailto:${email}" style="color: #d17a86; text-decoration: none;">${email}</a>
                           </td>
                         </tr>
+                        <tr>
+                          <td width="35%" style="font-weight: 600; color: #888888; border-top: 1px solid #f0e6e6; font-size: 15px;">Validity Period:</td>
+                          <td width="65%" style="color: #333333; font-weight: bold; border-top: 1px solid #f0e6e6; font-size: 15px;">${startDate} - ${endDate}</td>
+                        </tr>
                       </table>
 
                       <div style="text-align: center; background-color: #fff1f2; border: 2px dashed #d17a86; padding: 25px; border-radius: 10px;">
@@ -83,7 +102,7 @@ export async function POST(request: Request) {
       `
     });
 
-    return NextResponse.json({ success: true, code });
+    return NextResponse.json({ success: true, code, startDate, endDate });
   } catch (error) {
     console.error('Error sending email:', error);
     return NextResponse.json({ error: 'Failed to generate code and send email' }, { status: 500 });

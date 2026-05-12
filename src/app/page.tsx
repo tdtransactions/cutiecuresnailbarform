@@ -10,12 +10,17 @@ export default function Home() {
   const [error, setError] = useState('');
   const [countdown, setCountdown] = useState(10);
   const [isGenerated, setIsGenerated] = useState(false);
+  const [dates, setDates] = useState({ start: '', end: '' });
 
   useEffect(() => {
     // Check local storage on mount
     const savedCode = localStorage.getItem('cutiecures_coupon');
     if (savedCode) {
       setCode(savedCode);
+      const savedDates = localStorage.getItem('cutiecures_dates');
+      if (savedDates) {
+        setDates(JSON.parse(savedDates));
+      }
       setIsGenerated(true);
       setStep(4);
       setCountdown(15);
@@ -81,7 +86,9 @@ export default function Home() {
       if (!res.ok) throw new Error(data.error || 'Failed to generate code');
       
       setCode(data.code);
+      setDates({ start: data.startDate, end: data.endDate });
       localStorage.setItem('cutiecures_coupon', data.code);
+      localStorage.setItem('cutiecures_dates', JSON.stringify({ start: data.startDate, end: data.endDate }));
       setStep(3);
     } catch (err: any) {
       setError(err.message || 'An unexpected error occurred. Please try again.');
@@ -209,7 +216,12 @@ export default function Home() {
             
             <div className="code-display">
               <span className="code-value">{code}</span>
-              <span className="code-hint" style={{ color: 'var(--error)', fontWeight: 'bold' }}>⚠️ Please screenshot or copy this code now!</span>
+              {dates.start && dates.end && (
+                <div style={{ marginTop: '10px', fontSize: '1rem', color: 'var(--primary)', fontWeight: '500' }}>
+                  Hạn sử dụng: {dates.start} - {dates.end}
+                </div>
+              )}
+              <span className="code-hint" style={{ color: 'var(--error)', fontWeight: 'bold', display: 'block', marginTop: '15px' }}>⚠️ Please screenshot or copy this code now!</span>
             </div>
             
             <button 
@@ -258,6 +270,7 @@ export default function Home() {
             </div>
 
             <div className="terms">
+              {dates.end && <div>Hạn dùng đến: {dates.end}</div>}
               One coupon per customer. Cannot be combined with other offers. Please present the code at checkout.
             </div>
           </div>
