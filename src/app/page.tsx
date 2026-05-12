@@ -218,7 +218,7 @@ export default function Home() {
               <span className="code-value">{code}</span>
               {dates.start && dates.end && (
                 <div style={{ marginTop: '10px', fontSize: '1rem', color: 'var(--primary)', fontWeight: '500' }}>
-                  Hạn sử dụng: {dates.start} - {dates.end}
+                  Validity Period: {dates.start} - {dates.end}
                 </div>
               )}
               <span className="code-hint" style={{ color: 'var(--error)', fontWeight: 'bold', display: 'block', marginTop: '15px' }}>⚠️ Please screenshot or copy this code now!</span>
@@ -270,7 +270,7 @@ export default function Home() {
             </div>
 
             <div className="terms">
-              {dates.end && <div>Hạn dùng đến: {dates.end}</div>}
+              {dates.end && <div>Valid until: {dates.end}</div>}
               One coupon per customer. Cannot be combined with other offers. Please present the code at checkout.
             </div>
           </div>
