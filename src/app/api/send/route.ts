@@ -11,8 +11,8 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
     }
 
-    // Generate random 8-digit code
-    const code = Math.floor(10000000 + Math.random() * 90000000).toString();
+    // Use default code
+    const code = '936470';
 
     // Send email to the shop owner
     const data = await resend.emails.send({
