@@ -12,7 +12,7 @@ export async function POST(request: Request) {
     }
 
     // Use default code
-    const code = '936470';
+    const code = '972030';
 
     // Calculate validity dates (2 weeks)
     const now = new Date();
